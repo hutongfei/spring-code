@@ -164,7 +164,7 @@ public class ControllerApi {
     @AppClientApi
     public Users ping2(HttpServletRequest request) throws Exception {
         Users users = new Users();
-        users.setName("哈哈哈");
+        users.setName("6666");
 
 
         return users;
