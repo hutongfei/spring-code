@@ -1,0 +1,80 @@
+======================================================================================================================================================================
+
+springMvc 接口扩展
+
+HandlerMapping接口 -- 处理请求的映射
+保存请求url到具体的方法的映射关系，，我们可以编写任意的HandlerMapping实现类，依据任何策略来决定一个web请求到HandlerExecutionChain对象的生成
+
+
+RequestMappingHandlerMapping  类
+// 运用 给url 统一加前缀 例如：/v2
+
+
+HandlerAdapter接口 – 处理适配器
+真正调用Controller的地方，其实就是适配各种Controller。HandlerAdapter就是你可以提供自己的实现类来处理handler对象。
+
+
+
+HandlerMethodArgumentResolver -- 处理方法参数解释绑定器
+调用controller方法之前，对方法参数进行解释绑定（实现WebArgumentResolver接口，spring3.1以后推荐使用HandlerMethodArgumentResolver）；
+
+
+Converter --  类型转换器
+参数绑定时springmvc会对从前端传来的参数自动转化成方法定义的参数的类型，我们可自己定义此接口来实现自己的类型的转换
+
+
+
+ViewResolver接口 – 视图解析器
+完成从ModelAndView到真正的视图的过程，ViewResolver接口是在DispatcherServlet中进行调用的，
+当DispatcherServlet调用完Controller后，会得到一个ModelAndView对象，然后DispatcherServlet会调用render方法进行视图渲染。
+
+
+HandlerExceptionResolver接口 --异常处理
+
+======================================================================================================================================================================
+
+spring bean扩展
+
+1.1 Aware系列
+BeanNameAware//  为了获取Bean在容器中的 ID 和name 树形
+ApplicationContextAware// 为了获取上下文容器对象
+BeanFactoryAware // 为了获取 BeanFactory 接口
+
+
+1.2 BeanPostProcessor系列
+BeanPostProcessor
+BeanFactoryPostProcessor
+InstantiationAwareBeanPostProcessor
+MergedBeanDefinitionPostProcessor
+
+
+1.3 初始化和销毁
+InitialingBean和@PostConstruct，initMethod
+DisposableBean和@PreDestroy，destroyMethod
+
+
+
+spring 注解
+@Priamry // 默认接受此bean
+@Conditional 满足某一特定条件 创建Bean
+@ModelAttribute 将键值对添加到全局
+
+
+
+@ImportResource({“classpath
+@ConfigurationProperties 将properties属性与一个Bean及其属性相关联，从而实现类型安全的配置。例：@ConfigurationProperties(prefix=”authot”，locations={“classpath
+@ConditionalOnBean 条件注解。当容器里有指定Bean的条件下。
+@ConditionalOnClass 条件注解。当类路径下有指定的类的条件下。
+@ConditionalOnExpression 条件注解。基于SpEL表达式作为判断条件。
+@ConditionalOnJava 条件注解。基于JVM版本作为判断条件。
+@ConditionalOnJndi 条件注解。在JNDI存在的条件下查找指定的位置。
+@ConditionalOnMissingBean 条件注解。当容器里没有指定Bean的情况下。
+@ConditionalOnMissingClass 条件注解。当类路径下没有指定的类的情况下。
+@ConditionalOnNotWebApplication 条件注解。当前项目不是web项目的条件下。
+@ConditionalOnResource 条件注解。类路径是否有指定的值。
+@ConditionalOnSingleCandidate 条件注解。当指定Bean在容器中只有一个，后者虽然有多个但是指定首选的Bean。
+@ConditionalOnWebApplication 条件注解。当前项目是web项目的情况下。
+@EnableConfigurationProperties 注解在类上，声明开启属性注入，使用@Autowired注入。例：@EnableConfigurationProperties(HttpEncodingProperties.class)
+
+
+
