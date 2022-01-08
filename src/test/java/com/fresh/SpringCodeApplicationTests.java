@@ -15,24 +15,6 @@ class SpringCodeApplicationTests {
 
     @Test
     void contextLoads() throws InterruptedException {
-
-        new Thread(() -> {
-            redissonUtil.lock("lock");
-            int i = 0;
-            count(i,10);
-            redissonUtil.unlock("lock");
-            count(i,20);
-        }, "计时").start();
-
-        TimeUnit.SECONDS.sleep(1);
-        while (true) {
-            redissonUtil.lock("lock",TimeUnit.SECONDS,5);
-            System.out.println("尝试5s 结束");
-            break;
-        }
-
-
-        redissonUtil.unlock("lock");
     }
 
     private void count(int i,int max) {
